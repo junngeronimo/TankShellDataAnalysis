@@ -29,6 +29,7 @@ public class FileIn {
 	
 	
 	
+	
 	public static void parseData(String contents, tankDataList data) {
 		
 		String[] contentsArray = contents.split(";");
