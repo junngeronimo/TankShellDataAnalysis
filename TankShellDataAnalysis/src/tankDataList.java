@@ -44,10 +44,13 @@ public class tankDataList {
 		public void printData() {
 			for (int i = 0; i < rows.size(); i++) {
 				int j = 0;
+				System.out.print("[");
 				for (String entry : getRow(i)) {
-					System.out.println(j + " - " + entry);
+//					System.out.println(j + " - " + entry);
+					System.out.print(entry + ", ");
 					j++;
 				}
+				System.out.print("]\n");
 			}
 		}
 		

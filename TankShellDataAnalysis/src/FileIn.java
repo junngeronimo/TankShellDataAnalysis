@@ -23,7 +23,7 @@ public class FileIn {
 		// Separate values into nested arrays
 		parseData(fileContents, data);
 		
-//		data.printData();
+		data.printData();
 
 	}
 	
@@ -34,22 +34,64 @@ public class FileIn {
 		
 		String[] contentsArray = contents.split(";");
 		ArrayList<String> row = new ArrayList<>();
+		ArrayList<String> row2 = new ArrayList<>();
+		boolean rowSwitch = false;
 		for(int i = 0; i < contentsArray.length; i++) {
 //			System.out.println("[" + i + "] - " +contentsArray[i]);
 //			System.out.println(contentsArray[i]);
+			
+
+			// Reaches end of line which should be split into two, add first to row
 			if (contentsArray[i].contains("\n")) {
-//				row.add(contentsArray[i].split("\n")[0]);
-//				row.add(contentsArray[i].split("\n")[1]);
-				System.out.println(contentsArray[i] + "\n");
-				System.out.println("boom" + contentsArray[i].split("\\s")[0]);
-				data.addRow(row);
-				row = new ArrayList<>();
+				String[] endOfLine = contentsArray[i].split("\n");
+				System.out.println(endOfLine.length);
+				for (String str : endOfLine) {
+					System.out.print(str + "\n");
+				}
+				
+
+					
+				
+				// First row finished, add to data immediately, clear row for next iteration
+				if (!rowSwitch) {
+					row.add(endOfLine[0]);
+					data.addRow(row);
+					row = new ArrayList<>();
+					rowSwitch = true; // When true, it's time to create row2.
+									  // False = create row
+				} else {
+					row2.add(endOfLine[0]);
+					data.addRow(row2);
+					row2 = new ArrayList<>();
+					rowSwitch = false;
+				}
+
+				// Start next row
+				if (endOfLine.length > 1 && rowSwitch) 
+					row2.add(endOfLine[1]);
+				else if (endOfLine.length > 1 && !rowSwitch) {
+					row.add(endOfLine[1]);
+				} else if (rowSwitch) {
+					row2.add(endOfLine[0]);
+				} else
+					row.add(endOfLine[0]);
+				
+
+				continue;
+
 			}
-			row.add(contentsArray[i]);
+			
+			if (rowSwitch)
+				row2.add(contentsArray[i]);
+			else
+				row.add(contentsArray[i]);
 			
 		}
 		
-//		data.addRow(row);
+		if (rowSwitch)
+			data.addRow(row2);
+		else
+			data.addRow(row);
 				
 		
 	}
