@@ -21,7 +21,7 @@ public class tankDataList {
 		
 		// Construct the data class
 		public tankDataList(){
-			rows = new ArrayList<>();
+			rows = new ArrayList<ArrayList<String>>();
 		}
 		
 		/* 
@@ -72,7 +72,7 @@ public class tankDataList {
 		// Gets column by number loc in row 
 		public ArrayList<String> getColumn(int col) {
 			int targetColumn = col;
-			ArrayList<String> values = new ArrayList<>();
+			ArrayList<String> values = new ArrayList<String>();
 			
 			for (int i = 0; i < rows.size(); i++) {
 				values.add(getRow(i).get(targetColumn));

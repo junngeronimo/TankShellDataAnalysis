@@ -20,8 +20,8 @@ public class FileIn {
 	public static void readData(String contents, tankDataList data) {
 		
 		String[] contentsArray = contents.split(";");
-		ArrayList<String> row = new ArrayList<>();
-		ArrayList<String> row2 = new ArrayList<>();
+		ArrayList<String> row = new ArrayList<String>();
+		ArrayList<String> row2 = new ArrayList<String>();
 		boolean rowSwitch = false;
 		for(int i = 0; i < contentsArray.length; i++) {
 			
@@ -29,22 +29,22 @@ public class FileIn {
 			if (contentsArray[i].contains("\n")) {
 				String[] endOfLine = contentsArray[i].split("\n");
 //				System.out.println(endOfLine.length);
-				for (String str : endOfLine) {
-//					System.out.print(str + "\n");
-				}
+// 				for (String str : endOfLine) {
+// //					System.out.print(str + "\n");
+// 				}
 				
 
 				// First row finished, add to data immediately, clear row for next iteration
 				if (!rowSwitch) {
 					row.add(endOfLine[0]);
 					data.addRow(row);
-					row = new ArrayList<>();
+					row = new ArrayList<String>();
 					rowSwitch = true; // When true, it's time to create row2.
 									  // False = create row
 				} else {
 					row2.add(endOfLine[0]);
 					data.addRow(row2);
-					row2 = new ArrayList<>();
+					row2 = new ArrayList<String>();
 					rowSwitch = false;
 				}
 
