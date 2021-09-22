@@ -1,0 +1,18 @@
+		/* ITERATE THROUGH A WORKSHEET */
+		//Sheet sheet = workbook.getSheetAt(0);
+	
+//		Map<Integer, ArrayList<String>> data1 = new HashMap<>();
+//		int i = 0;
+//		for (Row row : sheet) {
+//		    data1.put(i, new ArrayList<String>());
+//		    for (Cell cell : row) {
+//		        switch (cell.getCellTypeEnum()) {
+//		            case STRING:  break;
+//		            case NUMERIC: break;
+//		            case BOOLEAN:  break;
+//		            case FORMULA:  break;
+//		            default: data1.get(new Integer(i)).add(" ");
+//		        }
+//		    }
+//		    i++;
+//		}

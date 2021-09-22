@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,10 +24,7 @@ public class FileIn {
 		ArrayList<String> row2 = new ArrayList<>();
 		boolean rowSwitch = false;
 		for(int i = 0; i < contentsArray.length; i++) {
-//			System.out.println("[" + i + "] - " +contentsArray[i]);
-//			System.out.println(contentsArray[i]);
 			
-
 			// Reaches end of line which should be split into two, add first to row
 			if (contentsArray[i].contains("\n")) {
 				String[] endOfLine = contentsArray[i].split("\n");
@@ -34,8 +34,6 @@ public class FileIn {
 				}
 				
 
-					
-				
 				// First row finished, add to data immediately, clear row for next iteration
 				if (!rowSwitch) {
 					row.add(endOfLine[0]);
@@ -89,23 +87,27 @@ public class FileIn {
 		
 		// Var init.
 		String fileLine = "";
-
+		File input = new File(file);
+		
 		// Get file name
-		try {
-			for (String line : Files.readAllLines(Paths.get(file))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			//DEBUG
+//			System.out.println(Paths.get(file));
+//			System.out.println("exists? - " + input.exists());
+//			System.out.println("directory? - " +input.isDirectory());
+//			System.out.println("can read? - " +input.canRead());
+			
+			for (String line; (line = br.readLine()) != null;) {
 				fileLine += line;
 				fileLine += "\n";
 			}
 		} catch (IOException e) {
-			// File was not found
-			System.out.println("File was not found. Try again.");
-			Scanner reader = new Scanner(System.in);
-			file = reader.next();
+			
+			e.printStackTrace();
+			
 
 		}
-		
-		// Test if file was read in properly
-//		System.out.println(fileLine);
+
 		
 		return fileLine;
 	}
